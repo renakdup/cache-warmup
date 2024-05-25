@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.6/phpunit.xsd"
+         beStrictAboutTestsThatDoNotTestAnything="true"
+         colors="true"
+         bootstrap="vendor/autoload.php"
+         cacheResultFile="./tmp/.phpunit.result.cache"
+         failOnRisky="true"
+         failOnWarning="true"
+>
+    <coverage includeUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">./src</directory>
+            <!--            <directory suffix=".php">./vendor</directory>-->
+        </include>
+    </coverage>
+
+    <testsuites>
+        <testsuite name="Cache Warm up">
+            <directory>./src/Test</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
