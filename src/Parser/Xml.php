@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Renakdup\CacheWarmUp\Parser;
 
+use Renakdup\CacheWarmUp\Exception\XmlParseException;
 use SimpleXMLElement;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -14,9 +15,16 @@ class Xml implements ParserInterface
     {
     }
 
+    /**
+     * @throws XmlParseException
+     */
     public function parse($data): array
     {
-        $doc = new SimpleXMLElement($data);
+        $doc = simplexml_load_string($data);
+        if ($doc === false) {
+            throw new XmlParseException("Xml data invalid.");
+        }
+
         $urlConstraint = new Assert\Url();
 
         $urls = [];

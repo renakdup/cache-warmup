@@ -4,5 +4,5 @@ namespace Renakdup\CacheWarmUp\Crawler;
 
 interface CrawlerInterface
 {
-    public function run();
+    public function run( array $urls );
 }

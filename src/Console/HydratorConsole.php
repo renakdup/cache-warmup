@@ -6,7 +6,7 @@ namespace Renakdup\CacheWarmUp\Console;
 
 use Renakdup\CacheWarmUp\Command\CacheWarmupCommand;
 
-class HydratorConsoleDTO
+class HydratorConsole
 {
     public function hydrate(array $args, array $options, ConsoleDTO $dto): ConsoleDTO
     {
@@ -21,8 +21,10 @@ class HydratorConsoleDTO
             : $options[CacheWarmupCommand::OPTION_DELAY];
 
         $dto->timeout = is_numeric($options[CacheWarmupCommand::OPTION_TIMEOUT])
-            ? (int)$options[CacheWarmupCommand::OPTION_TIMEOUT]
+            ? (float)$options[CacheWarmupCommand::OPTION_TIMEOUT]
             : $options[CacheWarmupCommand::OPTION_TIMEOUT];
+
+        $dto->verbose = $options[CacheWarmupCommand::OPTION_VERBOSE];
 
         return $dto;
     }

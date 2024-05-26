@@ -23,8 +23,12 @@ class ConsoleDTO
     #[Assert\NotNull]
     public $delay;
 
-    #[Assert\Type('integer')]
+    #[Assert\Type('float')]
     #[Assert\GreaterThanOrEqual(0)]
     #[Assert\NotNull]
     public $timeout;
+
+    #[Assert\Type('bool')]
+    #[Assert\NotNull]
+    public $verbose;
 }

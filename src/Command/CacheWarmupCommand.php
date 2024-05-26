@@ -3,9 +3,10 @@
 namespace Renakdup\CacheWarmUp\Command;
 
 use GuzzleHttp\Client;
-use Renakdup\CacheWarmUp\Crawler\Crawler;
+use Renakdup\CacheWarmUp\Crawler\SitemapCrawler;
 use Renakdup\CacheWarmUp\Console\ConsoleDTO;
-use Renakdup\CacheWarmUp\Console\HydratorConsoleDTO;
+use Renakdup\CacheWarmUp\Console\HydratorConsole;
+use Renakdup\CacheWarmUp\Http\RequestFacade;
 use Renakdup\CacheWarmUp\Sitemap;
 use Renakdup\SimpleDIC\Container;
 use Symfony\Component\Console\Command\Command;
@@ -22,9 +23,10 @@ class CacheWarmupCommand extends Command
     public const OPTION_CONCURRENCY = 'concurrency';
     public const OPTION_DELAY = 'delay';
     public const OPTION_TIMEOUT = 'timeout';
+    public const OPTION_VERBOSE = 'verbose';
 
     public function __construct(
-        private HydratorConsoleDTO $hydratorConsoleDTO,
+        private HydratorConsole $hydratorConsoleDTO,
         private ValidatorInterface $validator,
         private Container $c,
     ) {
@@ -75,14 +77,24 @@ class CacheWarmupCommand extends Command
             return Command::FAILURE;
         }
 
-        /** @var Crawler $crawl */
-        $crawl = $this->c->make(Crawler::class);
-        $crawl->run();
+        $time_start = microtime(true);
+        /** @var SitemapCrawler $sitemap_crawler */
+        $sitemap_crawler = $this->c->make(SitemapCrawler::class);
+        $page_urls = $sitemap_crawler->run(
+            [$consoleDTO->url, 'https://xxxrwerq2rwqrwrq.com']
+        );
 
+        $this->print( '<fg=cyan>=============</>', $output);
 
-        exit;
+        /** @var RequestFacade $pages_crawler */
+        $pages_crawler = $this->c->make(RequestFacade::class);
+        $pages_crawler->sendRequests($page_urls);
 
-        $output->writeln("Passed url:" . $url_arg);
+        $time = microtime(true) - $time_start;
+
+        $this->print( '<fg=cyan>=============</>', $output);
+        $output->writeln('<fg=black;bg=cyan>Count of pages</>: ' . count($page_urls) . '');
+        $output->writeln('<fg=black;bg=cyan>Time</>: ' . round($time / 60, 2) . ' min');
 
         return Command::SUCCESS;
     }
@@ -98,5 +110,16 @@ class CacheWarmupCommand extends Command
                 )
             );
         }
+    }
+
+    private function print(string $text, OutputInterface $output)
+    {
+        /** @var ConsoleDTO $consoleDTO */
+        $consoleDTO = $this->c->get(ConsoleDTO::class);
+        if ($consoleDTO->verbose) {
+            return;
+        }
+
+        $output->writeln($text);
     }
 }
