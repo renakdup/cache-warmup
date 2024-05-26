@@ -23,5 +23,8 @@ composer require --dev renakdup/cache-warm-up
 - [ ] Add Unit tests.
 - [ ] Add exclude patterns.
 - [ ] Add hooks for extending.
+- [ ] Add phpcs
+- [ ] Add phpstan
+- [ ] Add github action runs: phpcs/phpstan
 - [ ] Add deploybot.
 
