@@ -81,7 +81,8 @@ class CacheWarmupCommand extends Command
         /** @var SitemapCrawler $sitemap_crawler */
         $sitemap_crawler = $this->c->make(SitemapCrawler::class);
         $page_urls = $sitemap_crawler->run(
-            [$consoleDTO->url, 'https://xxxrwerq2rwqrwrq.com']
+            [$consoleDTO->url]
+            //[$consoleDTO->url, 'https://xxxrwerq2rwqrwrq.com']
         );
 
         $this->print( '<fg=cyan>=============</>', $output);

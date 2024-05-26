@@ -27,7 +27,7 @@ class RequestFacade
         $client = $this->client;
         $requests = function () use ($client, $urls) {
             for ($i = 0; $i < count($urls); $i++) {
-                if ($this->req_count >= $this->consoleDTO->concurrency) {
+                if ($this->consoleDTO->delay !== 0 && $this->req_count >= $this->consoleDTO->concurrency) {
                     //$milliseconds_in_second = 1000000;
                     echo "Delay {$this->consoleDTO->delay} sec\n";
                     sleep($this->consoleDTO->delay);
