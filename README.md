@@ -14,6 +14,8 @@ composer require --dev renakdup/cache-warm-up
 
 ### Roadmap
 - [x] Release composer package.
+- [x] Support concurrency option.
+- [x] Support delay option.
 - [ ] Add request handlers.
 - [ ] Add formatters.
 - [ ] Add filelogger.
@@ -21,4 +23,5 @@ composer require --dev renakdup/cache-warm-up
 - [ ] Add Unit tests.
 - [ ] Add exclude patterns.
 - [ ] Add hooks for extending.
+- [ ] Add deploybot.
 
