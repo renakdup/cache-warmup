@@ -11,6 +11,30 @@ composer require --dev renakdup/cache-warm-up
 ```bash
 ./vendor/bin/cache-warmup https://wp-yoda.com/sitemap_index.xml -c 5 -d 2
 ```
+It would looks like
+```bash
+andreipisarevskii$ ./vendor/bin/cache-warmup https://wp-yoda.com/sitemap_index.xml -c 5 -d 2
+200 | https://wp-yoda.com/sitemap_index.xml
+200 | https://wp-yoda.com/post-sitemap.xml
+200 | https://wp-yoda.com/post_tag-sitemap.xml
+200 | https://wp-yoda.com/notices-sitemap.xml
+200 | https://wp-yoda.com/category-sitemap.xml
+200 | https://wp-yoda.com/page-sitemap.xml
+200 | https://wp-yoda.com/author-sitemap.xml
+200 | https://wp-yoda.com/notice_category-sitemap.xml
+=============
+200 | X-Cache:          | Cf-Cache-Status:         | https://wp-yoda.com/
+200 | X-Cache:          | Cf-Cache-Status:         | https://wp-yoda.com/about-me/
+200 | X-Cache:          | Cf-Cache-Status:         | https://wp-yoda.com/adaptacziya-programmnyh-produktov/otlichiya-i18n-i-i10n/
+200 | X-Cache:          | Cf-Cache-Status:         | https://wp-yoda.com/bazy-dannyh/klasternye-i-neklasternye-indeksy/
+200 | X-Cache:          | Cf-Cache-Status:         | https://wp-yoda.com/category/bazy-dannyh/relyaczionnye-bazy-dannyh/mysql/
+Delay 2 sec
+200 | X-Cache:          | Cf-Cache-Status:         | https://wp-yoda.com/category/adaptacziya-programmnyh-produktov/
+200 | X-Cache:          | Cf-Cache-Status:         | https://wp-yoda.com/category/bash/
+200 | X-Cache:          | Cf-Cache-Status:         | https://wp-yoda.com/category/bazy-dannyh/
+200 | X-Cache:          | Cf-Cache-Status:         | https://wp-yoda.com/category/bazy-dannyh/relyaczionnye-bazy-dannyh/
+200 | X-Cache:          | Cf-Cache-Status:         | https://wp-yoda.com/category/macos/
+```
 
 ### Roadmap
 - [x] Release composer package.
