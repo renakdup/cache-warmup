@@ -11,8 +11,13 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class Xml implements ParserInterface
 {
-    public function __construct(private ValidatorInterface $validation)
+    private ValidatorInterface $validation;
+
+    public function __construct(
+        //ValidatorInterface $validation
+    )
     {
+       // $this->validation = $validation;
     }
 
     /**
@@ -35,9 +40,9 @@ class Xml implements ParserInterface
 
             $url = (string)$item->loc ?? '';
 
-            if (count($this->validation->validate($url, $urlConstraint)) > 0) {
-                continue;
-            }
+//            if (count($this->validation->validate($url, $urlConstraint)) > 0) {
+//                continue;
+//            }
 
             $urls[] = $url;
         }

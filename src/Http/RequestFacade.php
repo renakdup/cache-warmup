@@ -15,11 +15,15 @@ use Renakdup\CacheWarmUp\Console\ConsoleDTO;
 class RequestFacade
 {
     private int $req_count = 0;
+    private ConsoleDTO $consoleDTO;
+    private Client $client;
 
     public function __construct(
-        private ConsoleDTO $consoleDTO,
-        private Client $client,
+        ConsoleDTO $consoleDTO,
+        Client $client
     ) {
+        $this->client = $client;
+        $this->consoleDTO = $consoleDTO;
     }
 
     public function sendRequests($urls, bool $is_sitemap = false): array

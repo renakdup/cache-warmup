@@ -30,12 +30,12 @@ final class App
     private static function getContainerWithDefinitions(): Container
     {
         $c = new Container();
-        $c->set(
-            ValidatorInterface::class,
-            fn() => Validation::createValidatorBuilder()
-                ->enableAttributeMapping()
-                ->getValidator()
-        );
+//        $c->set(
+//            ValidatorInterface::class,
+//            fn() => Validation::createValidatorBuilder()
+//                ->enableAttributeMapping()
+//                ->getValidator()
+//        );
         $c->set(Client::class, fn() => new Client());
         $c->set(
             ParserInterface::class,

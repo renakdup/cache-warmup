@@ -14,13 +14,21 @@ class SitemapCrawler implements CrawlerInterface
     private array $data = [];
 
     private array $failed_requests = [];
+    private ConsoleDTO $consoleDTO;
+    private Client $client;
+    private ParserInterface $parser;
+    private RequestFacade $request;
 
     public function __construct(
-        private ConsoleDTO $consoleDTO, // TODO:: should be config
-        private Client $client,
-        private ParserInterface $parser,
-        private RequestFacade $request,
+        ConsoleDTO $consoleDTO, // TODO:: should be config
+        Client $client,
+        ParserInterface $parser,
+        RequestFacade $request
     ) {
+        $this->request = $request;
+        $this->parser = $parser;
+        $this->client = $client;
+        $this->consoleDTO = $consoleDTO;
     }
 
     public function run(array $urls): array

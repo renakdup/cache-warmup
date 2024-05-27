@@ -24,13 +24,19 @@ class CacheWarmupCommand extends Command
     public const OPTION_DELAY = 'delay';
     public const OPTION_TIMEOUT = 'timeout';
     public const OPTION_VERBOSE = 'verbose';
+    private HydratorConsole $hydratorConsoleDTO;
+    //private ValidatorInterface $validator;
+    private Container $c;
 
     public function __construct(
-        private HydratorConsole $hydratorConsoleDTO,
-        private ValidatorInterface $validator,
-        private Container $c,
+        HydratorConsole $hydratorConsoleDTO,
+        //ValidatorInterface $validator,
+        Container $c
     ) {
-        parent::__construct(name: 'cache-warmup');
+        $this->c = $c;
+        //$this->validator = $validator;
+        $this->hydratorConsoleDTO = $hydratorConsoleDTO;
+        parent::__construct('cache-warmup');
     }
 
     protected function configure(): void
@@ -70,12 +76,12 @@ class CacheWarmupCommand extends Command
         );
         $this->c->set(ConsoleDTO::class, $consoleDTO);
 
-        $violations = $this->validator->validate($consoleDTO);
-
-        if (count($violations) > 0) {
-            $this->print_command_errors($violations, $output);
-            return Command::FAILURE;
-        }
+//        //$violations = $this->validator->validate($consoleDTO);
+//
+//        if (count($violations) > 0) {
+//            $this->print_command_errors($violations, $output);
+//            return Command::FAILURE;
+//        }
 
         $time_start = microtime(true);
         /** @var SitemapCrawler $sitemap_crawler */
