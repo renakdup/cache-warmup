@@ -1,10 +1,17 @@
 # Cache warm-up via console 
 
+_Support: PHP ^8.0 and PHP 7.4 in `dev-0.1.1-7.4` version_.  
+
 PHP package for warming up cache on sites via http requests.
 
 ### Install
 ```bash
 composer require --dev renakdup/cache-warm-up
+```
+
+! PHP 7.4 available just in this branch
+```bash
+composer require --dev renakdup/cache-warm-up:dev-0.1.1-7.4
 ```
 
 ### Run
